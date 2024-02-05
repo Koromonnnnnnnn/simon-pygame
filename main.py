@@ -58,7 +58,8 @@ while gameLoop:
         mousePos = event.pos
 
     # update
-    pattern.append(random.randrange(0, 2))
+    pattern.append(random.randrange(0, 4))
+    print(pattern)
 
     # play computer pattern
     for i in range(len(pattern)):
@@ -73,15 +74,25 @@ while gameLoop:
                             (200, 200, 400, 400), pi, (3*pi/2), 100)
             pygame.display.flip()
             winsound.Beep(640, 500)
+        elif pattern[i] == 2:
+            pygame.draw.arc(screen, (255, 255, 0),
+                            (200, 200, 400, 400), (3*pi/2), (0*pi), 100)
+            pygame.display.flip()
+            winsound.Beep(340, 500)
+        elif pattern[i] == 3:
+            pygame.draw.arc(screen, (0, 0, 255),
+                            (200, 200, 400, 400), (0 * pi), (pi/2), 100)
+            pygame.display.flip()
+            winsound.Beep(240, 500)
 
     # render section
     pygame.draw.arc(screen, (155, 0, 0),
                     (200, 200, 400, 400), (pi / 2), pi, 100)
     pygame.draw.arc(screen, (0, 155, 0),
                     (200, 200, 400, 400), pi, (3*pi/2), 100)
-    pygame.draw.arc(screen, (255, 255, 0), (200, 200,
+    pygame.draw.arc(screen, (155, 155, 0), (200, 200,
                                             400, 400), (3*pi/2), (0*pi), 100)
-    pygame.draw.arc(screen, (0, 0, 255), (200, 200, 400, 400),
+    pygame.draw.arc(screen, (0, 0, 155), (200, 200, 400, 400),
                     (0 * pi), (pi/2), 100)
     # game board
 
