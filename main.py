@@ -42,6 +42,11 @@ gameLoop = True
 
 while gameLoop:
     event = pygame.event.wait()
+    
+    collision((0*pi), (pi/2))
+    collision((3*pi/2), (0*pi))
+    collision((pi/2), pi)
+    collision(pi, (3*pi/2))
 
     # input
     if event.type == pygame.QUIT:
@@ -65,7 +70,7 @@ while gameLoop:
     for i in range(len(pattern)):
         if pattern[i] == 0:
             pygame.draw.arc(screen, (255, 0, 0),
-                            (200, 200, 400, 400), pi/2, pi, 100)
+                            (200, 200, 400, 400), (pi/2), pi, 100)
             pygame.display.flip()
             winsound.Beep(440, 500)
 
@@ -81,19 +86,19 @@ while gameLoop:
             winsound.Beep(340, 500)
         elif pattern[i] == 3:
             pygame.draw.arc(screen, (0, 0, 255),
-                            (200, 200, 400, 400), (0 * pi), (pi/2), 100)
+                            (200, 200, 400, 400), (0*pi), (pi/2), 100)
             pygame.display.flip()
             winsound.Beep(240, 500)
 
     # render section
     pygame.draw.arc(screen, (155, 0, 0),
-                    (200, 200, 400, 400), (pi / 2), pi, 100)
+                    (200, 200, 400, 400), (pi/2), pi, 100)
     pygame.draw.arc(screen, (0, 155, 0),
                     (200, 200, 400, 400), pi, (3*pi/2), 100)
     pygame.draw.arc(screen, (155, 155, 0), (200, 200,
                                             400, 400), (3*pi/2), (0*pi), 100)
     pygame.draw.arc(screen, (0, 0, 155), (200, 200, 400, 400),
-                    (0 * pi), (pi/2), 100)
+                    (0*pi), (pi/2), 100)
     # game board
 
     pygame.display.flip()
