@@ -7,6 +7,17 @@ pygame.init()
 pygame.display.set_caption("Simon")
 screen = pygame.display.set_mode((800, 800))
 
+# main variables
+xpos = 0
+ypos = 0
+mousePos = (xpos, ypos)
+hasClicked = False
+pattern = []
+playerPattern = []
+playerTurn = True
+pi = 3.1415
+ded = False
+gameLoop = True
 
 def collision(xpos, ypos):
     if math.sqrt((xpos - 400) ** 2 + (ypos - 400) ** 2) > 200 or math.sqrt((xpos - 400)) ** 2:
@@ -27,18 +38,6 @@ def collision(xpos, ypos):
         winsound.Beep(640, 500)
         return 1
 
-
-# main variables
-xpos = 0
-ypos = 0
-mousePos = (xpos, ypos)
-hasClicked = False
-pattern = []
-playerPattern = []
-playerTurn = True
-pi = 3.1415
-ded = False
-gameLoop = True
 
 while gameLoop:
     event = pygame.event.wait()
