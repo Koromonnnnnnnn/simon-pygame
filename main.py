@@ -40,7 +40,7 @@ def collision(xpos, ypos):
         return 1
 
 
-while gameLoop:
+while gameLoop == True:
     event = pygame.event.wait()
 
     # input
@@ -58,8 +58,8 @@ while gameLoop:
         mousePos = event.pos
 
     # player turn
-    print("starting player turn")
     if playerTurn == True:
+        print("starting player turn")
         if len(playerPattern) < len(pattern):
             if hasClicked == True:
                 playerPattern.append(collision(mousePos[0], mousePos[1]))
