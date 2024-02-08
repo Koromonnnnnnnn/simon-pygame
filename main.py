@@ -19,8 +19,9 @@ pi = 3.1415
 ded = False
 gameLoop = True
 
+
 def collision(xpos, ypos):
-    if math.sqrt((xpos - 400) ** 2 + (ypos - 400) ** 2) > 200 or math.sqrt((xpos - 400)) ** 2:
+    if math.sqrt((xpos - 400) ** 2 + (ypos - 400) ** 2) > 200 or math.sqrt((xpos - 400) ** 2):
         print("Outside of ring")
         return -1
     elif xpos < 400 and ypos < 400:
@@ -41,11 +42,6 @@ def collision(xpos, ypos):
 
 while gameLoop:
     event = pygame.event.wait()
-    
-    collision((0*pi), (pi/2))
-    collision((3*pi/2), (0*pi))
-    collision((pi/2), pi)
-    collision(pi, (3*pi/2))
 
     # input
     if event.type == pygame.QUIT:
@@ -61,47 +57,60 @@ while gameLoop:
     if event.type == pygame.MOUSEMOTION:
         mousePos = event.pos
 
-    # update
-    pattern.append(random.randrange(0, 4))
-    print(pattern)
+    # player turn
+    print("starting player turn")
+    if playerTurn == True:
+        if len(playerPattern) < len(pattern):
+            if hasClicked == True:
+                playerPattern.append(collision(mousePos[0], mousePos[1]))
+                hasClicked = False
+        else:
+            playerTurn = False
+            pygame.time.wait(800)
 
     # play computer pattern
-    for i in range(len(pattern)):
-        if pattern[i] == 0:
-            pygame.draw.arc(screen, (255, 0, 0),
-                            (200, 200, 400, 400), (pi/2), pi, 100)
-            pygame.display.flip()
-            winsound.Beep(440, 500)
+    if playerTurn == False:
+        print("Starting machine turn")
+        pattern.append(random.randrange(0, 4))
 
-        elif pattern[i] == 1:
-            pygame.draw.arc(screen, (0, 255, 0),
-                            (200, 200, 400, 400), pi, (3*pi/2), 100)
-            pygame.display.flip()
-            winsound.Beep(640, 500)
-        elif pattern[i] == 2:
-            pygame.draw.arc(screen, (255, 255, 0),
-                            (200, 200, 400, 400), (3*pi/2), (0*pi), 100)
-            pygame.display.flip()
-            winsound.Beep(340, 500)
-        elif pattern[i] == 3:
-            pygame.draw.arc(screen, (0, 0, 255),
-                            (200, 200, 400, 400), (0*pi), (pi/2), 100)
-            pygame.display.flip()
-            winsound.Beep(240, 500)
+        for i in range(len(pattern)):
+            if pattern[i] == 0:
+                pygame.draw.arc(screen, (255, 0, 0),
+                                (200, 200, 400, 400), (pi/2), pi, 100)
+                pygame.display.flip()
+                winsound.Beep(440, 500)
 
-    # render section
-    pygame.draw.arc(screen, (155, 0, 0),
-                    (200, 200, 400, 400), (pi/2), pi, 100)
-    pygame.draw.arc(screen, (0, 155, 0),
-                    (200, 200, 400, 400), pi, (3*pi/2), 100)
-    pygame.draw.arc(screen, (155, 155, 0), (200, 200,
-                                            400, 400), (3*pi/2), (0*pi), 100)
-    pygame.draw.arc(screen, (0, 0, 155), (200, 200, 400, 400),
-                    (0*pi), (pi/2), 100)
-    # game board
+            elif pattern[i] == 1:
+                pygame.draw.arc(screen, (0, 255, 0),
+                                (200, 200, 400, 400), pi, (3*pi/2), 100)
+                pygame.display.flip()
+                winsound.Beep(640, 500)
+            elif pattern[i] == 2:
+                pygame.draw.arc(screen, (255, 255, 0),
+                                (200, 200, 400, 400), (3*pi/2), (0*pi), 100)
+                pygame.display.flip()
+                winsound.Beep(340, 500)
+            elif pattern[i] == 3:
+                pygame.draw.arc(screen, (0, 0, 255),
+                                (200, 200, 400, 400), (0*pi), (pi/2), 100)
+                pygame.display.flip()
+                winsound.Beep(240, 500)
 
-    pygame.display.flip()
-    pygame.time.wait(800)
+        # render section
+        pygame.draw.arc(screen, (155, 0, 0),
+                        (200, 200, 400, 400), (pi/2), pi, 100)
+        pygame.draw.arc(screen, (0, 155, 0),
+                        (200, 200, 400, 400), pi, (3*pi/2), 100)
+        pygame.draw.arc(screen, (155, 155, 0), (200, 200,
+                                                400, 400), (3*pi/2), (0*pi), 100)
+        pygame.draw.arc(screen, (0, 0, 155), (200, 200, 400, 400),
+                        (0*pi), (pi/2), 100)
+        # game board
+
+        pygame.display.flip()
+        pygame.time.wait(800)
+        playerTurn = True
+        playerPattern.clear()
 
 
 pygame.quit()
